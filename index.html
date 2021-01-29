@@ -25,11 +25,11 @@
 
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="mobileAmountDecrease" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="mobileAmount" type="text" class="form-control text-center" value="1">
+                           <button id="mobileAmountIncrease" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
-                        <h5>$1219</h5>
+                        <h5>$ <span id="currentTotalMobilePrice">1219</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -43,12 +43,12 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="mobileCoverAmountDecrease" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="mobileCoverAmount" type="text" class="form-control text-center" value="1">
+                           <button id="mobileCoverAmountIncrease" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                         </div>
-                        <h5>$59</h5>
+                        <h5>$ <span id="currentTotalMobileCoverPrice">59</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -64,9 +64,9 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$1,278</h5>
+                        <h5>$ <span id="subTotal">1,278</span></h5>
                         <h5>$0</h5>
-                        <h5>$1,278</h5>
+                        <h5>$ <span id="grandTotal">1,278</span></h5>
                      </div>
                   </div>
                </div>
@@ -78,5 +78,173 @@
       </div>
    </section>
 </body>
+
+<!-- adding responsiveness in the cart buttons -->
+
+<script>
+   // working with the mobile section
+
+   // adding event handler to the plus button
+   const mobilePlus = document.getElementById("mobileAmountIncrease");
+   mobilePlus.addEventListener("click", function(){
+      const mobileAmount = document.getElementById("mobileAmount").value;
+      const numberOfMobile = parseFloat(mobileAmount);
+
+      const totalMobile = numberOfMobile + 1;
+      //console.log("No. of mobile", totalMobile);
+      document.getElementById("mobileAmount").value = totalMobile;
+
+      const currentMobilePrice = document.getElementById("currentTotalMobilePrice").innerText;
+      const currentTotalMobilePrice = parseFloat(currentMobilePrice);
+      console.log("Current Mobile Price ", currentTotalMobilePrice);
+
+      const updatedTotalMobilePrice = 1219 * totalMobile;
+      console.log("updatedTotalMobilePrice",updatedTotalMobilePrice);
+      document.getElementById("currentTotalMobilePrice").innerText = updatedTotalMobilePrice;
+
+      // updating the sub-total amount
+
+      const subTotal = document.getElementById("subTotal").innerText;
+      const replacedSubTotal = subTotal.replace(/,/g, '');
+      const subTotalAmount = parseFloat(replacedSubTotal);
+
+      const updatedSubTotal = subTotalAmount + 1219;
+      console.log("updated subTotal ",updatedSubTotal);
+      document.getElementById("subTotal").innerText = updatedSubTotal;
+
+      // updating the final total amount
+
+      const grandTotal = document.getElementById("grandTotal").innerText;
+      const replacedGrandTotal = grandTotal.replace(/,/g, '');
+      const grandTotalAmount = parseFloat(replacedGrandTotal);
+
+      const updatedGrandTotal = grandTotalAmount + 1219;
+      console.log("updated grandTotal ",updatedGrandTotal);
+      document.getElementById("grandTotal").innerText = updatedGrandTotal;
+      
+   })
+
+   // adding event handler to the minus button
+
+      const mobileMinus = document.getElementById("mobileAmountDecrease");
+   
+      mobileMinus.addEventListener("click", function(){
+      const mobileAmount = document.getElementById("mobileAmount").value;
+      const numberOfMobile = parseFloat(mobileAmount);
+
+      console.log("number of mobile",numberOfMobile);
+      
+      if(numberOfMobile>0){
+         const totalMobile = numberOfMobile - 1;
+         document.getElementById("mobileAmount").value = totalMobile;
+
+         const currentMobilePrice = document.getElementById("currentTotalMobilePrice").innerText;
+         const currentTotalMobilePrice = parseFloat(currentMobilePrice);
+         console.log("Current Mobile Price ", currentTotalMobilePrice);
+
+         const updatedTotalMobilePrice = 1219 * totalMobile;
+         console.log("updatedTotalMobilePrice",updatedTotalMobilePrice);
+         document.getElementById("currentTotalMobilePrice").innerText = updatedTotalMobilePrice;
+
+         // updating the sub-total amount
+
+         const subTotal = document.getElementById("subTotal").innerText;
+         const replacedSubTotal = subTotal.replace(/,/g, '');
+         const subTotalAmount = parseFloat(replacedSubTotal);
+
+         const updatedSubTotal = subTotalAmount - 1219;
+         console.log("updated subTotal ",updatedSubTotal);
+         document.getElementById("subTotal").innerText = updatedSubTotal;
+
+         // updating the final total amount
+
+         const grandTotal = document.getElementById("grandTotal").innerText;
+         const replacedGrandTotal = grandTotal.replace(/,/g, '');
+         const grandTotalAmount = parseFloat(replacedGrandTotal);
+
+         const updatedGrandTotal = grandTotalAmount - 1219;
+         console.log("updated grandTotal ",updatedGrandTotal);
+         document.getElementById("grandTotal").innerText = updatedGrandTotal;
+      }  
+   })
+
+   // working with the mobile cover section
+
+   // adding event handler to the plus button
+
+      const mobileCoverPlusBtn = document.getElementById("mobileCoverAmountIncrease");
+      mobileCoverPlusBtn.addEventListener("click", function(){
+      const mobileCoverAmount = document.getElementById("mobileCoverAmount").value;
+      const numberOfMobileCover = parseFloat(mobileCoverAmount);
+
+      const totalMobileCover = numberOfMobileCover + 1;
+      document.getElementById("mobileCoverAmount").value = totalMobileCover;
+
+      const currentMobileCoverPrice = document.getElementById("currentTotalMobileCoverPrice").innerText;
+      const currentTotalMobileCoverPrice = parseFloat(currentMobileCoverPrice);
+
+      const updatedTotalMobileCoverPrice = 59 * totalMobileCover;
+      document.getElementById("currentTotalMobileCoverPrice").innerText = updatedTotalMobileCoverPrice;
+
+      // updating the sub-total amount
+
+      const subTotal = document.getElementById("subTotal").innerText;
+      const replacedSubTotal = subTotal.replace(/,/g, '');
+      const subTotalAmount = parseFloat(replacedSubTotal);
+
+      const updatedSubTotal = subTotalAmount + 59;
+      document.getElementById("subTotal").innerText = updatedSubTotal;
+
+      // updating the final total amount
+
+      const grandTotal = document.getElementById("grandTotal").innerText;
+      const replacedGrandTotal = grandTotal.replace(/,/g, '');
+      const grandTotalAmount = parseFloat(replacedGrandTotal);
+
+      const updatedGrandTotal = grandTotalAmount + 59;
+      document.getElementById("grandTotal").innerText = updatedGrandTotal;
+      
+   })
+
+   // adding event handler to the minus button
+
+      const mobileCoverMinus = document.getElementById("mobileCoverAmountDecrease");
+   
+      mobileCoverMinus.addEventListener("click", function(){
+      const mobileCoverAmount = document.getElementById("mobileCoverAmount").value;
+      const numberOfMobileCover = parseFloat(mobileCoverAmount);
+      
+      if(numberOfMobileCover>0){
+         const totalMobileCover = numberOfMobileCover - 1;
+         document.getElementById("mobileCoverAmount").value = totalMobileCover;
+
+         const currentMobileCoverPrice = document.getElementById("currentTotalMobileCoverPrice").innerText;
+         const currentTotalMobileCoverPrice = parseFloat(currentMobileCoverPrice);
+
+         const updatedTotalMobileCoverPrice = 59 * totalMobileCover;
+         document.getElementById("currentTotalMobileCoverPrice").innerText = updatedTotalMobileCoverPrice;
+
+         // updating the sub-total amount
+
+         const subTotal = document.getElementById("subTotal").innerText;
+         const replacedSubTotal = subTotal.replace(/,/g, '');
+         const subTotalAmount = parseFloat(replacedSubTotal);
+
+         const updatedSubTotal = subTotalAmount - 59;
+         document.getElementById("subTotal").innerText = updatedSubTotal;
+
+         // updating the final total amount
+
+         const grandTotal = document.getElementById("grandTotal").innerText;
+         const replacedGrandTotal = grandTotal.replace(/,/g, '');
+         const grandTotalAmount = parseFloat(replacedGrandTotal);
+
+         const updatedGrandTotal = grandTotalAmount - 59;
+         document.getElementById("grandTotal").innerText = updatedGrandTotal;
+      }  
+   })
+   
+
+</script>
 
 </html>
